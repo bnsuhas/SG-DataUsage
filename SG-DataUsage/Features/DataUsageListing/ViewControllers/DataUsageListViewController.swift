@@ -10,11 +10,19 @@ import UIKit
 
 class DataUsageListViewController: UITableViewController
 {
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.tableView.separatorColor = UIColor.clear
         self.tableView.contentInset = UIEdgeInsets.init(top: 10, left: 0, bottom: 0, right: 0)
+        
+        let dataUsageRequest = DataUsageRequest.init(previousPage: 0)
+        dataUsageRequest.fetchMobileDataUsage(onSuccess: { (datUsageResponse) in
+            print("Fetched successfully")
+        }) { (error) in
+            print("Fetch failed")
+        }
     }
     
     //MARK: UITableViewDelegate Methods

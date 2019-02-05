@@ -10,8 +10,7 @@ import Foundation
 
 struct apiConstants {
     static let baseURL = "https://data.gov.sg/api/"
-    static let queryEndpoint = "action/datastore_search"
-    static let resourceID = "a807b7ab-6cad-4aa6-87d0-e283a7353a0f"
+    static let queryEndpoint = "action/datastore_search?resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f"
 }
 
 struct colorConstants {

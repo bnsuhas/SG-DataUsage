@@ -22,7 +22,7 @@
 		EC1E0C2322098BD70019C823 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C2222098BD70019C823 /* BaseViewController.swift */; };
 		EC1E0C252209917D0019C823 /* DataUsageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C242209917D0019C823 /* DataUsageModel.swift */; };
 		EC1E0C282209990D0019C823 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C272209990D0019C823 /* NetworkManager.swift */; };
-		EC1E0C2A2209A1BC0019C823 /* URLSessionDataTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C292209A1BC0019C823 /* URLSessionDataTaskMock.swift */; };
+		EC1E0C2A2209A1BC0019C823 /* URLSessionMockHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C292209A1BC0019C823 /* URLSessionMockHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +64,7 @@
 		EC1E0C2222098BD70019C823 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		EC1E0C242209917D0019C823 /* DataUsageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUsageModel.swift; sourceTree = "<group>"; };
 		EC1E0C272209990D0019C823 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		EC1E0C292209A1BC0019C823 /* URLSessionDataTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskMock.swift; sourceTree = "<group>"; };
+		EC1E0C292209A1BC0019C823 /* URLSessionMockHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMockHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,7 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				EC1E0BF62209787D0019C823 /* SG_DataUsageTests.swift */,
-				EC1E0C292209A1BC0019C823 /* URLSessionDataTaskMock.swift */,
+				EC1E0C292209A1BC0019C823 /* URLSessionMockHelper.swift */,
 				EC1E0BF82209787D0019C823 /* Info.plist */,
 			);
 			path = "SG-DataUsageTests";
@@ -373,7 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC1E0BF72209787D0019C823 /* SG_DataUsageTests.swift in Sources */,
-				EC1E0C2A2209A1BC0019C823 /* URLSessionDataTaskMock.swift in Sources */,
+				EC1E0C2A2209A1BC0019C823 /* URLSessionMockHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

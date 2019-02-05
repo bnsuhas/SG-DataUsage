@@ -8,7 +8,13 @@
 
 import Foundation
 
-struct DataUsageListingUIConstants {
+struct dataUsageListingUIConstants {
     static let storyboardName = "DataUsageListing"
     static let initialControllerIdentifier = "DataListingNavigationController"
+}
+
+struct dataUsageJSONConstants {
+    static let resourceID = "resource_id"
+    static let limitKey = "limit"
+    static let offsetKey = "offset"
 }
