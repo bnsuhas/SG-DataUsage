@@ -21,6 +21,8 @@
 		EC1E0C2122098B5C0019C823 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C2022098B5C0019C823 /* RootViewController.swift */; };
 		EC1E0C2322098BD70019C823 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C2222098BD70019C823 /* BaseViewController.swift */; };
 		EC1E0C252209917D0019C823 /* DataUsageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C242209917D0019C823 /* DataUsageModel.swift */; };
+		EC1E0C282209990D0019C823 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C272209990D0019C823 /* NetworkManager.swift */; };
+		EC1E0C2A2209A1BC0019C823 /* URLSessionDataTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C292209A1BC0019C823 /* URLSessionDataTaskMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		EC1E0C2022098B5C0019C823 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		EC1E0C2222098BD70019C823 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		EC1E0C242209917D0019C823 /* DataUsageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUsageModel.swift; sourceTree = "<group>"; };
+		EC1E0C272209990D0019C823 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		EC1E0C292209A1BC0019C823 /* URLSessionDataTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +118,7 @@
 				EC1E0C0F220986340019C823 /* AppConstants.swift */,
 				EC1E0BDE220978760019C823 /* AppDelegate.swift */,
 				EC1E0C2022098B5C0019C823 /* RootViewController.swift */,
-				EC1E0C2222098BD70019C823 /* BaseViewController.swift */,
+				EC1E0C26220998D30019C823 /* Utilities */,
 				EC1E0C152209877E0019C823 /* Features */,
 				EC1E0C11220986CE0019C823 /* CoreData */,
 				EC1E0C12220986E00019C823 /* Resources */,
@@ -127,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				EC1E0BF62209787D0019C823 /* SG_DataUsageTests.swift */,
+				EC1E0C292209A1BC0019C823 /* URLSessionDataTaskMock.swift */,
 				EC1E0BF82209787D0019C823 /* Info.plist */,
 			);
 			path = "SG-DataUsageTests";
@@ -210,6 +215,15 @@
 			path = "Storyboard&XIBs";
 			sourceTree = "<group>";
 		};
+		EC1E0C26220998D30019C823 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				EC1E0C2222098BD70019C823 /* BaseViewController.swift */,
+				EC1E0C272209990D0019C823 /* NetworkManager.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -274,7 +288,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
-				ORGANIZATIONNAME = zapr;
+				ORGANIZATIONNAME = FrisbeeLabs;
 				TargetAttributes = {
 					EC1E0BDA220978760019C823 = {
 						CreatedOnToolsVersion = 10.1;
@@ -342,6 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC1E0C282209990D0019C823 /* NetworkManager.swift in Sources */,
 				EC1E0C2122098B5C0019C823 /* RootViewController.swift in Sources */,
 				EC1E0BE1220978760019C823 /* DataUsageListViewController.swift in Sources */,
 				EC1E0BE7220978760019C823 /* SG_DataUsage.xcdatamodeld in Sources */,
@@ -358,6 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC1E0BF72209787D0019C823 /* SG_DataUsageTests.swift in Sources */,
+				EC1E0C2A2209A1BC0019C823 /* URLSessionDataTaskMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
