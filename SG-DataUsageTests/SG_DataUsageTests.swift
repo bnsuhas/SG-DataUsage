@@ -26,7 +26,6 @@ class SG_DataUsageTests: XCTestCase {
     }
 
     func testInternalServerError() {
-        
         let mockSession = URLSessionMock()
         mockSession.data = nil
         mockSession.response = HTTPURLResponse.init(url: URL.init(string:"https://www.google.com")! ,
@@ -72,7 +71,6 @@ class SG_DataUsageTests: XCTestCase {
     }
     
     func testCorruptJSONData() {
-        
         let mockSession = URLSessionMock()
         mockSession.data = Data.init(base64Encoded:"VGhpcyBpcyBub3QgYSBKU09O")
         mockSession.response = HTTPURLResponse.init(url: URL.init(string:"https://www.google.com")! ,

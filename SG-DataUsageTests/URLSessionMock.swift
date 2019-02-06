@@ -1,5 +1,5 @@
 //
-//  URLSessionDataTaskMock.swift
+//  URLSessionMock.swift
 //  SG-DataUsageTests
 //
 //  Created by Suhas BN on 5/2/19.

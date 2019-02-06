@@ -1,5 +1,5 @@
 //
-//  ReachabilityMockHelper.swift
+//  ReachabilityMock.swift
 //  SG-DataUsageTests
 //
 //  Created by Suhas BN on 6/2/19.
@@ -13,8 +13,6 @@ class ReachabilityMock: Reachability
 {
     var reachableViaWifi = false
     var reachableViaWWAN = false
-    
-    
     
     override func isReachableViaWiFi() -> Bool {
        return reachableViaWifi
