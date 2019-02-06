@@ -13,6 +13,13 @@ struct apiConstants {
     static let queryEndpoint = "action/datastore_search?resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f"
 }
 
+struct networkErrorConstants {
+    static let networkErrorDomain = "com.networkErrorDomain"
+    static let urlSessionError = 0
+    static let notReachable = 1
+    static let parsingError = 2
+}
+
 struct colorConstants {
     static let defaultCellColor = ""
     static let usageDecreasedCellColor = ""

@@ -16,14 +16,14 @@ class DataUsageRequest {
     }
     
     func fetchMobileDataUsage(onSuccess successBlock:@escaping(DataUsageResponse)->Void,
-        onFailure:@escaping(NSError)->Void) {
+        onFailure failureBlock:@escaping(NSError)->Void) {
         
         NetworkManager.sharedInstance.getRequest(apiConstants.queryEndpoint,
                                                  params: nil,
                                                  onSuccess: { (responseJSON) in
                                                     
         }) { (error) in
-            
+            failureBlock(error)
         }
     }
 }

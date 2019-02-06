@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Reachability
 
 class NetworkManager {
     
@@ -19,7 +20,16 @@ class NetworkManager {
     }
     
     func httpRequest(_ urlPath:String, params: [String: Any]?, method: String, onSuccess
-        successBlock:@escaping ([String:Any])->Void, onFailure failureBlock:@escaping (Error)->Void) {
+        successBlock:@escaping ([String:Any])->Void, onFailure failureBlock:@escaping (NSError)->Void) {
+        
+        let reachability = Reachability.forInternetConnection()
+        if reachability!.isReachableViaWiFi() == false && reachability!.isReachableViaWWAN() == false
+        {
+            let errorObject = self.errorObjectFromString("No network connection detected", errorCode: networkErrorConstants.notReachable)
+            failureBlock(errorObject)
+            
+            return
+        }
         
         let urlString = apiConstants.baseURL+urlPath
         
@@ -43,32 +53,48 @@ class NetworkManager {
                     
                     if urlResponse.statusCode == 200 {
                         if let responseData = responseData {
-                            if let jsonObject = try? JSONSerialization.jsonObject(with: responseData,
-                            options: JSONSerialization.ReadingOptions.mutableContainers) as? [String:Any]
-                            {
-                                successBlock(jsonObject!)
+                            do{
+                                if let jsonObject = try JSONSerialization.jsonObject(with: responseData,
+                                options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any]
+                                {
+                                    successBlock(jsonObject)
+                                }
+                            } catch let error as NSError {
+                                failureBlock(error)
                             }
                         }
-                    }
-                    else {
+                    } else {
+                        
                         let localizedErrorString = HTTPURLResponse.localizedString(forStatusCode: urlResponse.statusCode)
+                        let errorObject = self.errorObjectFromString(localizedErrorString,
+                                                                     errorCode: urlResponse.statusCode)
+                        failureBlock(errorObject)
                     }
+                } else {
+                    
+                    let errorObject = self.errorObjectFromString("Couldn't parse the response", errorCode: networkErrorConstants.parsingError)
+                    failureBlock(errorObject)
                 }
-            }
-            else {
-                failureBlock(error!)
+            } else {
+                
+                let errorObject = self.errorObjectFromString(error!.localizedDescription, errorCode: networkErrorConstants.urlSessionError)
+                failureBlock(errorObject)
             }
         }
         dataTask.resume()
     }
     
-    func getRequest(_ urlPath:String, params: [String: Any]?, onSuccess successBlock:@escaping ([String:Any])->Void, onFailure failureBlock:@escaping (Error)->Void) {
+    func getRequest(_ urlPath:String, params: [String: Any]?, onSuccess successBlock:@escaping ([String:Any])->Void, onFailure failureBlock:@escaping (NSError)->Void) {
         
         self.httpRequest(urlPath, params: params, method: "GET", onSuccess: successBlock, onFailure: failureBlock)
     }
     
-//    func getErrorObject(localizedString:String) -> Error {
-//       // let error = Error()
-//       // return error
-//    }
+    func errorObjectFromString(_ errorString:String, errorCode:Int) -> NSError
+    {
+        let error = NSError.init(domain: networkErrorConstants.networkErrorDomain,
+                                 code: errorCode,
+                                 userInfo: [NSLocalizedDescriptionKey:errorString])
+        
+        return error
+    }
 }
