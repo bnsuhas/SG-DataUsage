@@ -26,6 +26,7 @@
 		EC1E0C252209917D0019C823 /* DataUsageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C242209917D0019C823 /* DataUsageModel.swift */; };
 		EC1E0C282209990D0019C823 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C272209990D0019C823 /* NetworkManager.swift */; };
 		EC1E0C2A2209A1BC0019C823 /* URLSessionMockHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C292209A1BC0019C823 /* URLSessionMockHelper.swift */; };
+		EC1E0C2C220ABA350019C823 /* ReachabilityMockHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C2B220ABA350019C823 /* ReachabilityMockHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		EC1E0C242209917D0019C823 /* DataUsageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUsageModel.swift; sourceTree = "<group>"; };
 		EC1E0C272209990D0019C823 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		EC1E0C292209A1BC0019C823 /* URLSessionMockHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMockHelper.swift; sourceTree = "<group>"; };
+		EC1E0C2B220ABA350019C823 /* ReachabilityMockHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityMockHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 			children = (
 				EC1E0BF62209787D0019C823 /* SG_DataUsageTests.swift */,
 				EC1E0C292209A1BC0019C823 /* URLSessionMockHelper.swift */,
+				EC1E0C2B220ABA350019C823 /* ReachabilityMockHelper.swift */,
 				EC1E0BF82209787D0019C823 /* Info.plist */,
 			);
 			path = "SG-DataUsageTests";
@@ -275,7 +278,7 @@
 				EC1E0BD7220978760019C823 /* Sources */,
 				EC1E0BD8220978760019C823 /* Frameworks */,
 				EC1E0BD9220978760019C823 /* Resources */,
-				57CB9DA2A1E3320367B390F5 /* [CP] Embed Pods Frameworks */,
+				83E33B71DB13835DE39DF51B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -294,6 +297,7 @@
 				EC1E0BEE2209787D0019C823 /* Sources */,
 				EC1E0BEF2209787D0019C823 /* Frameworks */,
 				EC1E0BF02209787D0019C823 /* Resources */,
+				A36182399C840CC5C547426E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -313,6 +317,7 @@
 				EC1E0BF92209787D0019C823 /* Sources */,
 				EC1E0BFA2209787D0019C823 /* Frameworks */,
 				EC1E0BFB2209787D0019C823 /* Resources */,
+				5AC19E1039142A4C7EF71CF9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -418,7 +423,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		57CB9DA2A1E3320367B390F5 /* [CP] Embed Pods Frameworks */ = {
+		5AC19E1039142A4C7EF71CF9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -426,7 +431,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SG-DataUsage/Pods-SG-DataUsage-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-SG-DataUsageUITests/Pods-SG-DataUsageUITests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -437,7 +442,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SG-DataUsage/Pods-SG-DataUsage-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SG-DataUsageUITests/Pods-SG-DataUsageUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		77970A37E1D41EA3AF3AE9CB /* [CP] Check Pods Manifest.lock */ = {
@@ -460,6 +465,50 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		83E33B71DB13835DE39DF51B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SG-DataUsage/Pods-SG-DataUsage-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SG-DataUsage/Pods-SG-DataUsage-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A36182399C840CC5C547426E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SG-DataUsageTests/Pods-SG-DataUsageTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SG-DataUsageTests/Pods-SG-DataUsageTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E9F68682CC36EDA020BCFAD6 /* [CP] Check Pods Manifest.lock */ = {
@@ -509,6 +558,7 @@
 			files = (
 				EC1E0BF72209787D0019C823 /* SG_DataUsageTests.swift in Sources */,
 				EC1E0C2A2209A1BC0019C823 /* URLSessionMockHelper.swift in Sources */,
+				EC1E0C2C220ABA350019C823 /* ReachabilityMockHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

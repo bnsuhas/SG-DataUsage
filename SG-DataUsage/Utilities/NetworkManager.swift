@@ -13,17 +13,18 @@ class NetworkManager {
     
     static let sharedInstance = NetworkManager()
     var urlSession : URLSession
+    var reachability : Reachability
     
     private init () {
         let defaultConfiguration = URLSessionConfiguration.default
         self.urlSession = URLSession.init(configuration: defaultConfiguration)
+        self.reachability = Reachability.forInternetConnection()
     }
     
     func httpRequest(_ urlPath:String, params: [String: Any]?, method: String, onSuccess
         successBlock:@escaping ([String:Any])->Void, onFailure failureBlock:@escaping (NSError)->Void) {
         
-        let reachability = Reachability.forInternetConnection()
-        if reachability!.isReachableViaWiFi() == false && reachability!.isReachableViaWWAN() == false
+        if reachability.isReachableViaWiFi() == false && reachability.isReachableViaWWAN() == false
         {
             let errorObject = self.errorObjectFromString("No network connection detected", errorCode: networkErrorConstants.notReachable)
             failureBlock(errorObject)
