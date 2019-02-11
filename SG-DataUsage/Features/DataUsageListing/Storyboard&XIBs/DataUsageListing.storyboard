@@ -53,6 +53,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xdq-iu-jQ4">
                                                     <rect key="frame" x="8" y="49" width="39" height="39"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="volumeDropButton"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="39" id="EuK-Yq-YFd"/>
                                                         <constraint firstAttribute="height" constant="39" id="FB7-Wy-RRl"/>

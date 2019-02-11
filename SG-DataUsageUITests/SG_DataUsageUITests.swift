@@ -26,9 +26,42 @@ class SG_DataUsageUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testVolumeDecreasedButtonHidden() {
+        
+        let app = XCUIApplication()
+        let cell = app.tables.cells.containing(.staticText, identifier:"Year: 2005").element
+        app.tables.element.scrollToElement(element: cell)
+        let button = cell.buttons["volumeDropButton"]
+        XCTAssertFalse(button.visible())
     }
+    
+    func testVolumeDecreasedButtonVisible() {
+        
+        let app = XCUIApplication()
+        let cell = app.tables.cells.containing(.staticText, identifier:"Year: 2011").element
+        app.tables.element.scrollToElement(element: cell)
+        let button = cell.buttons["volumeDropButton"]
+        XCTAssertTrue(button.visible())
+    }
+    
+    func testVolumeDecreaseButtonTap() {
+        let app = XCUIApplication()
+        let cell = app.tables.cells.containing(.staticText, identifier:"Year: 2011").element
+        app.tables.element.scrollToElement(element: cell)
+        cell.buttons["volumeDropButton"].tap()
+        XCTAssertNotNil(app.alerts["Volume Dropped"]) 
+    }
+}
 
+extension XCUIElement {
+    func scrollToElement(element: XCUIElement) {
+        while !element.visible() {
+            swipeUp()
+        }
+    }
+    
+    func visible() -> Bool {
+        guard self.exists && !self.frame.isEmpty else { return false }
+        return XCUIApplication().windows.element(boundBy: 0).frame.contains(self.frame)
+    }
 }
