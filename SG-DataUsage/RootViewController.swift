@@ -13,7 +13,8 @@ class RootViewController: BaseViewController
 {
     override func viewDidLoad() {
         
-        let dataUsageListingVC = self.initViewController(dataUsageListingUIConstants.initialControllerIdentifier, storyboardName: dataUsageListingUIConstants.storyboardName)
+        let dataUsageListingVC = self.initViewController(dataUsageListingUIConstants.initialControllerIdentifier,
+                                                         storyboardName: dataUsageListingUIConstants.storyboardName)
         self.addChildVC(dataUsageListingVC)
     }
 }

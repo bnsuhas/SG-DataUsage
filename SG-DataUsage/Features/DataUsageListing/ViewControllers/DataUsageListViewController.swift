@@ -38,7 +38,7 @@ class DataUsageListViewController: UITableViewController, DataUsageListingCellDe
         self.tableView.refreshControl = UIRefreshControl()
         self.tableView.refreshControl?.beginRefreshing()
         
-        let dataUsageRequest = DataUsageRequest.init(previousPage: 0)
+        let dataUsageRequest = DataUsageRequest()
         dataUsageRequest.fetchMobileDataUsage(onSuccess: { (dataUsageResponse) in
             
             self.storeDataForOfflineUsage(dataUsageResponse.quarterlyUsageRecords)

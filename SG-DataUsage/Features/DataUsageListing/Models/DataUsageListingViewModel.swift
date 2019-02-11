@@ -13,15 +13,19 @@ class DataUsageListingViewModel {
     var annualDataUsageRecords: [AnnualDataUsage]?
     
     init(quarterlyUsageRecords:[QuarterlyUsageRecord]) {
+        
         self.annualDataUsageRecords = [AnnualDataUsage]()
+        //Create a list of available years, make sure each entry is unique
         let years = Set(quarterlyUsageRecords.map { $0.year }).sorted()
         var previousQuarter: QuarterlyUsageRecord?
         
         for year in years {
+            //Make sure the quarters are in ascending order -> [Q1, Q2, Q3, Q4]
             let filteredArray = quarterlyUsageRecords.filter {$0.year == year}.sorted {
                 $0.quarter < $1.quarter
             }
             do {
+                //Pass the last quarter from previous year while creating annual usage object. This is to verify if data usage dropped in Q1 in comparison to Q4 of last year.
                 let annualDataUsage = try AnnualDataUsage.init(year: year,
                                                            quarterlyUsageRecords: filteredArray,
                                                            previousQuarter: previousQuarter)

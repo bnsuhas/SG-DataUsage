@@ -24,11 +24,11 @@ class NetworkManager {
     func httpRequest(_ urlPath:String, params: [String: Any]?, method: String, onSuccess
         successBlock:@escaping ([String:Any])->Void, onFailure failureBlock:@escaping (NSError)->Void) {
         
+        // Check if the device has interbet connectivity, either through wifi or cellular
         if reachability.isReachableViaWiFi() == false && reachability.isReachableViaWWAN() == false
         {
             let errorObject = self.errorObjectFromString("No network connection detected", errorCode: networkErrorConstants.notReachable)
             failureBlock(errorObject)
-            
             return
         }
         
@@ -51,16 +51,18 @@ class NetworkManager {
             if error == nil {
                 
                 if let urlResponse = urlResponse as? HTTPURLResponse {
-                    
+                    //The API call was successful, go ahead and parse the data
                     if urlResponse.statusCode == 200 {
                         if let responseData = responseData {
                             do{
+                                //Serialize received data to JSON format
                                 if let jsonObject = try JSONSerialization.jsonObject(with: responseData,
                                 options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any]
                                 {
                                     successBlock(jsonObject)
                                 }
                             } catch let error as NSError {
+                                //If JSOn serialization failed, pass the failure block with appropriate error object
                                 failureBlock(error)
                             }
                         }
@@ -73,6 +75,7 @@ class NetworkManager {
                     }
                 } else {
                     
+                    //Oops we should never get here in the first place. Abort!
                     let errorObject = self.errorObjectFromString("Couldn't parse the response", errorCode: networkErrorConstants.parsingError)
                     failureBlock(errorObject)
                 }

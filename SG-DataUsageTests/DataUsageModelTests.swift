@@ -71,7 +71,7 @@ class DataUsageModelTests: XCTestCase {
         networkManagerToTest?.urlSession = mockSession
         networkManagerToTest?.reachability = mockReachability
         
-        let dataUsageRequest = DataUsageRequest.init(previousPage: 0)
+        let dataUsageRequest = DataUsageRequest()
         dataUsageRequest.fetchMobileDataUsage(onSuccess: { (dataUsageResponse) in
             XCTAssert(false, "Success block should not be called if network call results in an error")
         }) { (errorObject) in
@@ -97,7 +97,7 @@ class DataUsageModelTests: XCTestCase {
         networkManagerToTest?.urlSession = mockSession
         networkManagerToTest?.reachability = mockReachability
         
-        let dataUsageRequest = DataUsageRequest.init(previousPage: 0)
+        let dataUsageRequest = DataUsageRequest()
         dataUsageRequest.fetchMobileDataUsage(onSuccess: { (dataUsageResponse) in
             XCTAssert(false, "Success block should not be called if network call results in an error")
         }) { (errorObject) in
@@ -123,7 +123,7 @@ class DataUsageModelTests: XCTestCase {
     networkManagerToTest?.urlSession = mockSession
     networkManagerToTest?.reachability = mockReachability
     
-    let dataUsageRequest = DataUsageRequest.init(previousPage: 0)
+    let dataUsageRequest = DataUsageRequest()
     dataUsageRequest.fetchMobileDataUsage(onSuccess: { (dataUsageResponse) in
     XCTAssert(false, "Success block should not be called if network call results in an error")
     }) { (errorObject) in
@@ -149,7 +149,7 @@ class DataUsageModelTests: XCTestCase {
         networkManagerToTest?.urlSession = mockSession
         networkManagerToTest?.reachability = mockReachability
         
-        let dataUsageRequest = DataUsageRequest.init(previousPage: 0)
+        let dataUsageRequest = DataUsageRequest()
         dataUsageRequest.fetchMobileDataUsage(onSuccess: { (dataUsageResponse) in
             XCTAssertNotNil(dataUsageResponse, "Success block should return a non null response object")
         }) { (errorObject) in

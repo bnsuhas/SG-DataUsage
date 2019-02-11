@@ -9,21 +9,20 @@
 import Foundation
 
 class DataUsageRequest {
-    let previousPage : Int
-    
-    init(previousPage:Int) {
-        self.previousPage = previousPage
-    }
     
     func fetchMobileDataUsage(onSuccess successBlock:@escaping(DataUsageResponse)->Void,
         onFailure failureBlock:@escaping(NSError)->Void) {
         
+        //Fetch Mobile Data Usage Volume from the API
         NetworkManager.sharedInstance.getRequest(apiConstants.queryEndpoint,
                                                  params: nil,
                                                  onSuccess: { (responseJSON) in
+                                                    
+                                                    //JSON is not formatted properly, call the failureBlock
                                                     if let result = responseJSON[dataUsageJSONConstants.resultKey] as? [String: Any]
                                                     {
                                                         do {
+                                                            //Create the response object
                                                             let dataUsageResponse = try DataUsageResponse.init(result)
                                                             successBlock(dataUsageResponse)
                                                         } catch {
@@ -48,6 +47,8 @@ class DataUsageResponse {
     var quarterlyUsageRecords = [QuarterlyUsageRecord]()
     
       init(_ responseJSON:[String:Any]) throws {
+        
+        //Check if the JSON data is in proper format, if not throw an error
         if let dataUsageRecords = responseJSON[dataUsageJSONConstants.recordsKey] as? Array<[String: Any]> {
             for dataUsageRecord in dataUsageRecords {
                 quarterlyUsageRecords.append(QuarterlyUsageRecord.init(dictionary: dataUsageRecord))
@@ -93,6 +94,8 @@ class QuarterlyUsageRecord: NSObject, NSCoding
     }
     
     func encode(with aCoder: NSCoder) {
+        
+        //Int and Double cannot be encoded, convert them to string before storing.
         aCoder.encode(String(self.id), forKey: dataUsageJSONConstants.idKey)
         aCoder.encode(String(self.dataUsage), forKey: dataUsageJSONConstants.volumeKey)
         aCoder.encode("\(self.year)-\(self.quarter)", forKey: dataUsageJSONConstants.quarterKey)
