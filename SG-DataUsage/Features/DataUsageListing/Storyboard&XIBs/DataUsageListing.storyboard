@@ -65,6 +65,9 @@
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="usageDropButtonTapped:" destination="yYo-rT-2kS" eventType="touchUpInside" id="n28-sX-gdZ"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.91764705879999997" green="0.4431372549" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -98,6 +101,8 @@
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
+                                    <outlet property="roundedRectView" destination="uhK-nY-DSF" id="jDV-Gb-AVJ"/>
+                                    <outlet property="usageDropButton" destination="xdq-iu-jQ4" id="sxt-35-g3a"/>
                                     <outlet property="volumeLabel" destination="OB5-H2-xcH" id="yTl-uw-fyp"/>
                                     <outlet property="yearLabel" destination="xTg-Hm-16r" id="KIC-Yf-cxY"/>
                                 </connections>

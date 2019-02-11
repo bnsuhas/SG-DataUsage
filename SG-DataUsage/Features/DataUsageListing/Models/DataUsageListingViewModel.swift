@@ -15,18 +15,18 @@ class DataUsageListingViewModel {
     init(quarterlyUsageRecords:[QuarterlyUsageRecord]) {
         self.annualDataUsageRecords = [AnnualDataUsage]()
         let years = Set(quarterlyUsageRecords.map { $0.year }).sorted()
+        var previousQuarter: QuarterlyUsageRecord?
         
         for year in years {
-            let filteredArray = quarterlyUsageRecords.filter {$0.year == year}
+            let filteredArray = quarterlyUsageRecords.filter {$0.year == year}.sorted {
+                $0.quarter < $1.quarter
+            }
             let annualDataUsage = AnnualDataUsage.init(year: year,
                                                        quarterlyUsageRecords: filteredArray,
-                                                       previousQuarter: nil)
+                                                       previousQuarter: previousQuarter)
             self.annualDataUsageRecords?.append(annualDataUsage)
+            previousQuarter = filteredArray.last
         }
-    }
-    
-    func qoqVolumeDecreased(year:String) -> Bool {
-        return true
     }
     
     func quarterlyRecords(for year:String) -> [QuarterlyUsageRecord] {
@@ -38,11 +38,13 @@ class AnnualDataUsage {
     let year: String
     var totalUsage: Double
     var qoqVolumeDecreased: Bool
+    var decreasedQuarters: [String]
     let quarterlyUsageRecords: [QuarterlyUsageRecord]
     
     init(year:String, quarterlyUsageRecords:[QuarterlyUsageRecord], previousQuarter:QuarterlyUsageRecord?) {
         self.year = year
         self.quarterlyUsageRecords = quarterlyUsageRecords
+        self.decreasedQuarters = [String]()
         self.qoqVolumeDecreased = false
         self.totalUsage = 0.0
         
@@ -54,10 +56,10 @@ class AnnualDataUsage {
             
             if previousQuarter != nil, previousQuarter!.dataUsage > quarterlyRecord.dataUsage {
                 self.qoqVolumeDecreased = true
-                break
-            } else {
-                previousQuarter = quarterlyRecord
+                self.decreasedQuarters.append(quarterlyRecord.quarter)
             }
+            
+            previousQuarter = quarterlyRecord
         }
     }
 }

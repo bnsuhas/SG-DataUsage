@@ -9,11 +9,23 @@
 import UIKit
 
 class DataUsageListingCell: UITableViewCell {
+    @IBOutlet weak var roundedRectView: UIView!
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var volumeLabel: UILabel!
+    @IBOutlet weak var usageDropButton: UIButton!
+    
+    weak var delegate: DataUsageListingCellDelegate?
+    
+    @IBAction func usageDropButtonTapped(_ sender: UIButton) {
+        self.delegate?.showVolumeDropDetails(for: sender.tag)
+    }
 }
 
-class DataUsageListViewController: UITableViewController
+protocol DataUsageListingCellDelegate: class {
+    func showVolumeDropDetails(for row:Int)
+}
+
+class DataUsageListViewController: UITableViewController, DataUsageListingCellDelegate
 {
     var viewModel : DataUsageListingViewModel?
     
@@ -37,20 +49,32 @@ class DataUsageListViewController: UITableViewController
         }) { (error) in
             DispatchQueue.main.async {
                 self.tableView.refreshControl?.endRefreshing()
-                let alert = UIAlertController.init(title:"Couldn't fetch data usage details",
-                                                   message: error.localizedDescription, preferredStyle: .alert)
                 
-                let cancelAction = UIAlertAction.init(title:"Ok", style: .cancel) { (cancelAction) in
-                    alert.dismiss(animated: true, completion: nil)
-                }
-                alert.addAction(cancelAction)
-                
-                self.present(alert, animated: true, completion: nil)
+                self.showAlertWithTitle("Couldn't fetch data usage details",
+                                        message:error.localizedDescription,
+                                        cancelButtonTitle: "Ok")
             }
         }
     }
     
-    //MARK: UITableViewDelegate Methods
+    //MARK: - DataUsageListingCellDelegate Methods
+    
+    func showVolumeDropDetails(for row: Int) {
+        
+        let annualDataUsageRecord = self.viewModel!.annualDataUsageRecords![row]
+
+        var errorMessage = "Data usage volume dropped in"
+        
+        for quarter in annualDataUsageRecord.decreasedQuarters {
+            errorMessage = errorMessage + "\n-\(quarter)"
+        }
+        
+        self.showAlertWithTitle("Volume Dropped",
+                                message:errorMessage,
+                                cancelButtonTitle: "Ok")
+    }
+    
+    //MARK: - UITableViewDelegate Methods
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.viewModel?.annualDataUsageRecords?.count ?? 0
@@ -63,9 +87,38 @@ class DataUsageListViewController: UITableViewController
         let annualDataUsageRecord = self.viewModel!.annualDataUsageRecords![indexPath.row]
         
         cell.yearLabel.text = "Year: "+"\(annualDataUsageRecord.year)"
-        cell.volumeLabel.text = String(annualDataUsageRecord.totalUsage)
+        cell.volumeLabel.text = String.init(format:"%.4f", annualDataUsageRecord.totalUsage)
+        
+        if annualDataUsageRecord.qoqVolumeDecreased
+        {
+            cell.usageDropButton.isHidden = false
+            cell.usageDropButton.tag = indexPath.row
+            cell.delegate = self
+            cell.roundedRectView.backgroundColor = colorConstants.usageDecreasedCellColor
+        }
+        else
+        {
+            cell.usageDropButton.isHidden = true
+            cell.usageDropButton.tag = -1
+            cell.delegate = nil
+            cell.roundedRectView.backgroundColor = colorConstants.defaultCellColor
+        }
         
         return cell
+    }
+    
+    //MARK: - Instance Methods
+    
+    func showAlertWithTitle(_ title:String, message:String, cancelButtonTitle:String){
+        
+        let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction.init(title: cancelButtonTitle, style: .cancel) { (cancelAction) in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct apiConstants {
     static let baseURL = "https://data.gov.sg/api/"
@@ -21,6 +22,6 @@ struct networkErrorConstants {
 }
 
 struct colorConstants {
-    static let defaultCellColor = ""
-    static let usageDecreasedCellColor = ""
+    static let defaultCellColor = UIColor.init(red: 139.0/255.0, green: 216.0/255.0, blue: 189.0/255.0, alpha: 1.0)
+    static let usageDecreasedCellColor = UIColor.init(red: 234.0/255.0, green: 113.0/255.0, blue: 134.0/255.0, alpha: 1.0)
 }
