@@ -1,5 +1,5 @@
 //
-//  SG_DataUsageTests.swift
+//  NetworkManagerTests.swift
 //  SG-DataUsageTests
 //
 //  Created by Suhas BN on 5/2/19.
@@ -11,7 +11,7 @@ import Reachability
 
 @testable import SG_DataUsage
 
-class SG_DataUsageTests: XCTestCase {
+class NetworkManagerTests: XCTestCase {
     
     var networkManagerToTest: NetworkManager?
 
@@ -95,5 +95,5 @@ class SG_DataUsageTests: XCTestCase {
                                           onFailure: { (error) in
                                             XCTAssertNotNil(error, "Error object should be returned if JSON data is corrupt")
         })
-    }
+    }    
 }

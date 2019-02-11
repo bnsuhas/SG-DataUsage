@@ -28,3 +28,7 @@ struct dataUsageViewModelConstants {
     static let yearKey = "year"
     static let volumeKey = "volume"
 }
+
+enum DataUsageModelErrors: Error {
+    case invalidJSON
+}

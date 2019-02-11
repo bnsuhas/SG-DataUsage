@@ -24,16 +24,4 @@ class BaseViewController: UIViewController
         let storyboard = UIStoryboard.init(name: storyboardName, bundle: Bundle.main)
         return storyboard.instantiateViewController(withIdentifier: identifier)
     }
-    
-    func showAlertWithTitle(_ title:String, message:String, cancelButtonTitle:String){
-        
-        let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
-        
-        let cancelAction = UIAlertAction.init(title: cancelButtonTitle, style: .cancel) { (cancelAction) in
-            alert.dismiss(animated: true, completion: nil)
-        }
-        alert.addAction(cancelAction)
-        
-        self.present(alert, animated: true, completion: nil)
-    }
 }

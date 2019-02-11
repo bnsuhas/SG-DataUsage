@@ -23,8 +23,18 @@ class DataUsageRequest {
                                                  onSuccess: { (responseJSON) in
                                                     if let result = responseJSON[dataUsageJSONConstants.resultKey] as? [String: Any]
                                                     {
-                                                        let dataUsageResponse = DataUsageResponse.init(result)
-                                                        successBlock(dataUsageResponse)
+                                                        do {
+                                                            let dataUsageResponse = try DataUsageResponse.init(result)
+                                                            successBlock(dataUsageResponse)
+                                                        } catch {
+                                                            let error = NSError.init(domain: networkErrorConstants.networkErrorDomain, code:networkErrorConstants.parsingError ,
+                                                                                     userInfo: [NSLocalizedDescriptionKey:"JSON format error"])
+                                                            failureBlock(error)
+                                                        }
+                                                    } else {
+                                                        let error = NSError.init(domain: networkErrorConstants.networkErrorDomain, code:networkErrorConstants.parsingError ,
+                                                                                 userInfo: [NSLocalizedDescriptionKey:"JSON format error"])
+                                                        failureBlock(error)
                                                     }
                                             
         }) { (error) in
@@ -37,11 +47,13 @@ class DataUsageResponse {
     
     var quarterlyUsageRecords = [QuarterlyUsageRecord]()
     
-     init(_ responseJSON:[String:Any]) {
+      init(_ responseJSON:[String:Any]) throws {
         if let dataUsageRecords = responseJSON[dataUsageJSONConstants.recordsKey] as? Array<[String: Any]> {
             for dataUsageRecord in dataUsageRecords {
                 quarterlyUsageRecords.append(QuarterlyUsageRecord.init(dictionary: dataUsageRecord))
             }            
+        } else {
+            throw DataUsageModelErrors.invalidJSON
         }
     }
 }
@@ -69,8 +81,12 @@ class QuarterlyUsageRecord
         if let quarterDetals = dictionary[dataUsageJSONConstants.quarterKey] as? String
         {
             let parts = quarterDetals.split(separator: "-")
-            year = String(parts.first ?? "")
-            quarter = String(parts.last ?? "")
+            
+            if(parts.count == 2)
+            {
+                year = String(parts.first ?? "")
+                quarter = String(parts.last ?? "")
+            }
         }
         
         self.init(id: id, year: year, quarter: quarter, dataUsage: dataUsage)

@@ -28,10 +28,6 @@ class DataUsageListingViewModel {
             previousQuarter = filteredArray.last
         }
     }
-    
-    func quarterlyRecords(for year:String) -> [QuarterlyUsageRecord] {
-        return [QuarterlyUsageRecord]()
-    }
 }
 
 class AnnualDataUsage {
