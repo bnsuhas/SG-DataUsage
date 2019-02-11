@@ -50,13 +50,31 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xdq-iu-jQ4">
+                                                    <rect key="frame" x="8" y="49" width="39" height="39"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="39" id="EuK-Yq-YFd"/>
+                                                        <constraint firstAttribute="height" constant="39" id="FB7-Wy-RRl"/>
+                                                    </constraints>
+                                                    <inset key="imageEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                                                    <state key="normal" image="Scalefalling-512"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.91764705879999997" green="0.4431372549" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="OB5-H2-xcH" secondAttribute="bottom" constant="8" id="2Ha-r6-suu"/>
                                                 <constraint firstItem="J1C-Jb-hSj" firstAttribute="leading" secondItem="xTg-Hm-16r" secondAttribute="trailing" constant="8" id="LFe-9E-Nv0"/>
                                                 <constraint firstItem="xTg-Hm-16r" firstAttribute="top" secondItem="uhK-nY-DSF" secondAttribute="top" constant="8" id="MKl-9X-hnW"/>
+                                                <constraint firstItem="xdq-iu-jQ4" firstAttribute="leading" secondItem="uhK-nY-DSF" secondAttribute="leading" constant="8" id="Mur-Zw-oYe"/>
                                                 <constraint firstItem="xTg-Hm-16r" firstAttribute="leading" secondItem="uhK-nY-DSF" secondAttribute="leading" constant="8" id="X6x-aE-8Uh"/>
+                                                <constraint firstItem="xdq-iu-jQ4" firstAttribute="centerY" secondItem="OB5-H2-xcH" secondAttribute="centerY" id="drT-aL-VM6"/>
                                                 <constraint firstAttribute="trailing" secondItem="OB5-H2-xcH" secondAttribute="trailing" constant="8" id="eIL-aR-drF"/>
                                                 <constraint firstItem="J1C-Jb-hSj" firstAttribute="top" secondItem="uhK-nY-DSF" secondAttribute="top" constant="8" id="tNJ-RE-fgg"/>
                                                 <constraint firstAttribute="trailing" secondItem="J1C-Jb-hSj" secondAttribute="trailing" constant="8" id="tOD-0B-AOx"/>
@@ -113,4 +131,7 @@
             <point key="canvasLocation" x="-727" y="138"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Scalefalling-512" width="170" height="170"/>
+    </resources>
 </document>

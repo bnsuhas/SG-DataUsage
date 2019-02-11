@@ -17,4 +17,14 @@ struct dataUsageJSONConstants {
     static let resourceID = "resource_id"
     static let limitKey = "limit"
     static let offsetKey = "offset"
+    static let resultKey = "result"
+    static let recordsKey = "records"
+    static let idKey = "_id"
+    static let volumeKey = "volume_of_mobile_data"
+    static let quarterKey = "quarter"
+}
+
+struct dataUsageViewModelConstants {
+    static let yearKey = "year"
+    static let volumeKey = "volume"
 }

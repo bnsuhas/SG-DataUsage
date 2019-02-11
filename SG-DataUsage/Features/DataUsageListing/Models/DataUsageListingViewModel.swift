@@ -10,14 +10,19 @@ import Foundation
 
 class DataUsageListingViewModel {
     
-    let quarterlyUsageRecords: [QuarterlyUsageRecord]
+    var annualDataUsageRecords: [AnnualDataUsage]?
     
     init(quarterlyUsageRecords:[QuarterlyUsageRecord]) {
-        self.quarterlyUsageRecords = quarterlyUsageRecords
-    }
-    
-    func getDataUsageForAllYears() -> [String:String] {
-        return ["2019":"12.12345"]
+        self.annualDataUsageRecords = [AnnualDataUsage]()
+        let years = Set(quarterlyUsageRecords.map { $0.year }).sorted()
+        
+        for year in years {
+            let filteredArray = quarterlyUsageRecords.filter {$0.year == year}
+            let annualDataUsage = AnnualDataUsage.init(year: year,
+                                                       quarterlyUsageRecords: filteredArray,
+                                                       previousQuarter: nil)
+            self.annualDataUsageRecords?.append(annualDataUsage)
+        }
     }
     
     func qoqVolumeDecreased(year:String) -> Bool {
@@ -26,5 +31,33 @@ class DataUsageListingViewModel {
     
     func quarterlyRecords(for year:String) -> [QuarterlyUsageRecord] {
         return [QuarterlyUsageRecord]()
+    }
+}
+
+class AnnualDataUsage {
+    let year: String
+    var totalUsage: Double
+    var qoqVolumeDecreased: Bool
+    let quarterlyUsageRecords: [QuarterlyUsageRecord]
+    
+    init(year:String, quarterlyUsageRecords:[QuarterlyUsageRecord], previousQuarter:QuarterlyUsageRecord?) {
+        self.year = year
+        self.quarterlyUsageRecords = quarterlyUsageRecords
+        self.qoqVolumeDecreased = false
+        self.totalUsage = 0.0
+        
+        var previousQuarter = previousQuarter
+        
+        for quarterlyRecord in quarterlyUsageRecords {
+            
+            self.totalUsage += quarterlyRecord.dataUsage
+            
+            if previousQuarter != nil, previousQuarter!.dataUsage > quarterlyRecord.dataUsage {
+                self.qoqVolumeDecreased = true
+                break
+            } else {
+                previousQuarter = quarterlyRecord
+            }
+        }
     }
 }

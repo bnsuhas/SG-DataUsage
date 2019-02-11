@@ -21,7 +21,7 @@ class DataUsageRequest {
         NetworkManager.sharedInstance.getRequest(apiConstants.queryEndpoint,
                                                  params: nil,
                                                  onSuccess: { (responseJSON) in
-                                                    if let result = responseJSON["result"] as? [String: Any]
+                                                    if let result = responseJSON[dataUsageJSONConstants.resultKey] as? [String: Any]
                                                     {
                                                         let dataUsageResponse = DataUsageResponse.init(result)
                                                         successBlock(dataUsageResponse)
@@ -38,10 +38,10 @@ class DataUsageResponse {
     var quarterlyUsageRecords = [QuarterlyUsageRecord]()
     
      init(_ responseJSON:[String:Any]) {
-        if let dataUsageRecords = responseJSON["records"] as? Array<[String: Any]> {
+        if let dataUsageRecords = responseJSON[dataUsageJSONConstants.recordsKey] as? Array<[String: Any]> {
             for dataUsageRecord in dataUsageRecords {
                 quarterlyUsageRecords.append(QuarterlyUsageRecord.init(dictionary: dataUsageRecord))
-            }
+            }            
         }
     }
 }
@@ -61,12 +61,12 @@ class QuarterlyUsageRecord
     }
     
     convenience init(dictionary:[String: Any]) {
-        let id = dictionary["_id"] as? Int ?? -1
-        let dataUsage = Double(dictionary["volume_of_mobile_data"] as? String ?? "0.0")!
+        let id = dictionary[dataUsageJSONConstants.idKey] as? Int ?? -1
+        let dataUsage = Double(dictionary[dataUsageJSONConstants.volumeKey] as? String ?? "0.0")!
         var year = ""
         var quarter = ""
         
-        if let quarterDetals = dictionary["quarter"] as? String
+        if let quarterDetals = dictionary[dataUsageJSONConstants.quarterKey] as? String
         {
             let parts = quarterDetals.split(separator: "-")
             year = String(parts.first ?? "")
