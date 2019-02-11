@@ -13,7 +13,6 @@
 		EC1E0BDF220978760019C823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0BDE220978760019C823 /* AppDelegate.swift */; };
 		EC1E0BE1220978760019C823 /* DataUsageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0BE0220978760019C823 /* DataUsageListViewController.swift */; };
 		EC1E0BE4220978760019C823 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC1E0BE2220978760019C823 /* Main.storyboard */; };
-		EC1E0BE7220978760019C823 /* SG_DataUsage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0BE5220978760019C823 /* SG_DataUsage.xcdatamodeld */; };
 		EC1E0BE92209787C0019C823 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC1E0BE82209787C0019C823 /* Assets.xcassets */; };
 		EC1E0BEC2209787C0019C823 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC1E0BEA2209787C0019C823 /* LaunchScreen.storyboard */; };
 		EC1E0BF72209787D0019C823 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0BF62209787D0019C823 /* NetworkManagerTests.swift */; };
@@ -29,6 +28,7 @@
 		EC1E0C2C220ABA350019C823 /* ReachabilityMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C2B220ABA350019C823 /* ReachabilityMock.swift */; };
 		EC1E0C2E220B155C0019C823 /* DataUsageListingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C2D220B155B0019C823 /* DataUsageListingViewModel.swift */; };
 		EC1E0C30221153470019C823 /* DataUsageModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C2F221153470019C823 /* DataUsageModelTests.swift */; };
+		EC1E0C322211819F0019C823 /* DataUsageListingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C312211819F0019C823 /* DataUsageListingViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +62,6 @@
 		EC1E0BDE220978760019C823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC1E0BE0220978760019C823 /* DataUsageListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUsageListViewController.swift; sourceTree = "<group>"; };
 		EC1E0BE3220978760019C823 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		EC1E0BE6220978760019C823 /* SG_DataUsage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SG_DataUsage.xcdatamodel; sourceTree = "<group>"; };
 		EC1E0BE82209787C0019C823 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC1E0BEB2209787C0019C823 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC1E0BED2209787C0019C823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,6 +82,7 @@
 		EC1E0C2B220ABA350019C823 /* ReachabilityMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityMock.swift; sourceTree = "<group>"; };
 		EC1E0C2D220B155B0019C823 /* DataUsageListingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUsageListingViewModel.swift; sourceTree = "<group>"; };
 		EC1E0C2F221153470019C823 /* DataUsageModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUsageModelTests.swift; sourceTree = "<group>"; };
+		EC1E0C312211819F0019C823 /* DataUsageListingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUsageListingViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,7 +166,6 @@
 				EC1E0C2022098B5C0019C823 /* RootViewController.swift */,
 				EC1E0C26220998D30019C823 /* Utilities */,
 				EC1E0C152209877E0019C823 /* Features */,
-				EC1E0C11220986CE0019C823 /* CoreData */,
 				EC1E0C12220986E00019C823 /* Resources */,
 				EC1E0BED2209787C0019C823 /* Info.plist */,
 			);
@@ -180,6 +179,7 @@
 				EC1E0C292209A1BC0019C823 /* URLSessionMock.swift */,
 				EC1E0C2B220ABA350019C823 /* ReachabilityMock.swift */,
 				EC1E0C2F221153470019C823 /* DataUsageModelTests.swift */,
+				EC1E0C312211819F0019C823 /* DataUsageListingViewModelTests.swift */,
 				EC1E0BF82209787D0019C823 /* Info.plist */,
 			);
 			path = "SG-DataUsageTests";
@@ -192,14 +192,6 @@
 				EC1E0C032209787D0019C823 /* Info.plist */,
 			);
 			path = "SG-DataUsageUITests";
-			sourceTree = "<group>";
-		};
-		EC1E0C11220986CE0019C823 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				EC1E0BE5220978760019C823 /* SG_DataUsage.xcdatamodeld */,
-			);
-			path = CoreData;
 			sourceTree = "<group>";
 		};
 		EC1E0C12220986E00019C823 /* Resources */ = {
@@ -549,7 +541,6 @@
 				EC1E0C282209990D0019C823 /* NetworkManager.swift in Sources */,
 				EC1E0C2122098B5C0019C823 /* RootViewController.swift in Sources */,
 				EC1E0BE1220978760019C823 /* DataUsageListViewController.swift in Sources */,
-				EC1E0BE7220978760019C823 /* SG_DataUsage.xcdatamodeld in Sources */,
 				EC1E0BDF220978760019C823 /* AppDelegate.swift in Sources */,
 				EC1E0C1D2209881A0019C823 /* DataUsageListingConstants.swift in Sources */,
 				EC1E0C2322098BD70019C823 /* BaseViewController.swift in Sources */,
@@ -563,6 +554,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC1E0C322211819F0019C823 /* DataUsageListingViewModelTests.swift in Sources */,
 				EC1E0BF72209787D0019C823 /* NetworkManagerTests.swift in Sources */,
 				EC1E0C2A2209A1BC0019C823 /* URLSessionMock.swift in Sources */,
 				EC1E0C2C220ABA350019C823 /* ReachabilityMock.swift in Sources */,
@@ -887,19 +879,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		EC1E0BE5220978760019C823 /* SG_DataUsage.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				EC1E0BE6220978760019C823 /* SG_DataUsage.xcdatamodel */,
-			);
-			currentVersion = EC1E0BE6220978760019C823 /* SG_DataUsage.xcdatamodel */;
-			path = SG_DataUsage.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = EC1E0BD3220978760019C823 /* Project object */;
 }

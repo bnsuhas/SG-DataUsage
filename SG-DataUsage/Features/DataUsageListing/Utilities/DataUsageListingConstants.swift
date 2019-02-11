@@ -32,3 +32,8 @@ struct dataUsageViewModelConstants {
 enum DataUsageModelErrors: Error {
     case invalidJSON
 }
+
+enum DataListingViewModelErrors: Error {
+    case invalidYearString
+    case invalidQuartelyRecordsArray
+}
