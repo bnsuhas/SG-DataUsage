@@ -58,7 +58,7 @@ class DataUsageResponse {
     }
 }
 
-class QuarterlyUsageRecord
+class QuarterlyUsageRecord: NSObject, NSCoding
 {
     let id: Int
     let year:String
@@ -90,5 +90,23 @@ class QuarterlyUsageRecord
         }
         
         self.init(id: id, year: year, quarter: quarter, dataUsage: dataUsage)
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(String(self.id), forKey: dataUsageJSONConstants.idKey)
+        aCoder.encode(String(self.dataUsage), forKey: dataUsageJSONConstants.volumeKey)
+        aCoder.encode("\(self.year)-\(self.quarter)", forKey: dataUsageJSONConstants.quarterKey)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        
+        self.id = Int(aDecoder.decodeObject(forKey:dataUsageJSONConstants.idKey) as? String ?? "-1")!
+        self.dataUsage = Double(aDecoder.decodeObject(forKey:dataUsageJSONConstants.volumeKey) as? String ?? "0.0")!
+        
+        let quarterDetals = aDecoder.decodeObject(forKey:dataUsageJSONConstants.quarterKey) as! String
+        let parts = quarterDetals.split(separator: "-")
+        
+        self.year = String(parts.first ?? "")
+        self.quarter = String(parts.last ?? "")
     }
 }

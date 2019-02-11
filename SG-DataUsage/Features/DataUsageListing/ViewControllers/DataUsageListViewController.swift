@@ -41,6 +41,8 @@ class DataUsageListViewController: UITableViewController, DataUsageListingCellDe
         let dataUsageRequest = DataUsageRequest.init(previousPage: 0)
         dataUsageRequest.fetchMobileDataUsage(onSuccess: { (dataUsageResponse) in
             
+            self.storeDataForOfflineUsage(dataUsageResponse.quarterlyUsageRecords)
+            
             self.viewModel = DataUsageListingViewModel.init(quarterlyUsageRecords: dataUsageResponse.quarterlyUsageRecords)
             DispatchQueue.main.async {
                 self.tableView.refreshControl?.endRefreshing()
@@ -50,9 +52,17 @@ class DataUsageListViewController: UITableViewController, DataUsageListingCellDe
             DispatchQueue.main.async {
                 self.tableView.refreshControl?.endRefreshing()
                 
-                self.showAlertWithTitle("Couldn't fetch data usage details",
-                                        message:error.localizedDescription,
-                                        cancelButtonTitle: "Ok")
+                if error.code == networkErrorConstants.notReachable
+                {
+                    DispatchQueue.main.async {
+                        self.displayStoredData()
+                    }
+                }
+                else {
+                    self.showAlertWithTitle("Couldn't fetch data usage details",
+                                            message:error.localizedDescription,
+                                            cancelButtonTitle: "Ok")
+                }
             }
         }
     }
@@ -108,6 +118,39 @@ class DataUsageListViewController: UITableViewController, DataUsageListingCellDe
     }
     
     //MARK: - Instance Methods
+    
+    func storeDataForOfflineUsage(_ quarterlyUsageRecords:[QuarterlyUsageRecord]) {
+        if let data = try? NSKeyedArchiver.archivedData(withRootObject:quarterlyUsageRecords,
+                                                        requiringSecureCoding: false)
+        {
+            UserDefaults.standard.set(data, forKey: dataUsageListingUIConstants.savedDataKey)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    func displayStoredData() {
+        
+        let errorBlock :()->() = {
+            self.showAlertWithTitle("Couldn't fetch data usage details",
+                                    message: "Please check your network connection and try again later.", cancelButtonTitle: "ok")
+        }
+        
+            if let data = UserDefaults.standard.value(forKey: dataUsageListingUIConstants.savedDataKey) as? Data
+            {
+                do {
+                    let quarterlyUsageRecords = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [QuarterlyUsageRecord]
+                    self.viewModel = DataUsageListingViewModel.init(quarterlyUsageRecords: quarterlyUsageRecords!)
+                    self.tableView.refreshControl?.endRefreshing()
+                    self.tableView.reloadData()
+                    
+                    self.showAlertWithTitle("Offline Mode", message:"You are currently viewing offline data", cancelButtonTitle: "ok")
+                } catch {
+                    errorBlock()
+                }
+            }else {
+                errorBlock()
+        }
+    }
     
     func showAlertWithTitle(_ title:String, message:String, cancelButtonTitle:String){
         

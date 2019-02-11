@@ -11,6 +11,7 @@ import Foundation
 struct dataUsageListingUIConstants {
     static let storyboardName = "DataUsageListing"
     static let initialControllerIdentifier = "DataListingNavigationController"
+    static let savedDataKey = "savedData"
 }
 
 struct dataUsageJSONConstants {
