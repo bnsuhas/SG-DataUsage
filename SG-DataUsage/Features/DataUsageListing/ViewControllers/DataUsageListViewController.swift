@@ -37,34 +37,9 @@ class DataUsageListViewController: UITableViewController, DataUsageListingCellDe
         
         self.tableView.refreshControl = UIRefreshControl()
         self.tableView.refreshControl?.beginRefreshing()
+        self.tableView.refreshControl?.addTarget(self, action: #selector(beginDataUsageRequest), for: .valueChanged)
         
-        let dataUsageRequest = DataUsageRequest()
-        dataUsageRequest.fetchMobileDataUsage(onSuccess: { (dataUsageResponse) in
-            
-            self.storeDataForOfflineUsage(dataUsageResponse.quarterlyUsageRecords, userDefaults: UserDefaults.standard)
-            
-            self.viewModel = DataUsageListingViewModel.init(quarterlyUsageRecords: dataUsageResponse.quarterlyUsageRecords)
-            DispatchQueue.main.async {
-                self.tableView.refreshControl?.endRefreshing()
-                self.tableView.reloadData()
-            }
-        }) { (error) in
-            DispatchQueue.main.async {
-                self.tableView.refreshControl?.endRefreshing()
-                
-                if error.code == networkErrorConstants.notReachable
-                {
-                    DispatchQueue.main.async {
-                        self.displayStoredData()
-                    }
-                }
-                else {
-                    self.showAlertWithTitle("Couldn't fetch data usage details",
-                                            message:error.localizedDescription,
-                                            cancelButtonTitle: "Ok")
-                }
-            }
-        }
+        self.beginDataUsageRequest()
     }
     
     //MARK: - DataUsageListingCellDelegate Methods
@@ -118,6 +93,37 @@ class DataUsageListViewController: UITableViewController, DataUsageListingCellDe
     }
     
     //MARK: - Instance Methods
+    
+    @objc func beginDataUsageRequest() {
+        
+        let dataUsageRequest = DataUsageRequest()
+        dataUsageRequest.fetchMobileDataUsage(onSuccess: { (dataUsageResponse) in
+            
+            self.storeDataForOfflineUsage(dataUsageResponse.quarterlyUsageRecords, userDefaults: UserDefaults.standard)
+            
+            self.viewModel = DataUsageListingViewModel.init(quarterlyUsageRecords: dataUsageResponse.quarterlyUsageRecords)
+            DispatchQueue.main.async {
+                self.tableView.refreshControl?.endRefreshing()
+                self.tableView.reloadData()
+            }
+        }) { (error) in
+            DispatchQueue.main.async {
+                self.tableView.refreshControl?.endRefreshing()
+                
+                if error.code == networkErrorConstants.notReachable
+                {
+                    DispatchQueue.main.async {
+                        self.displayStoredData()
+                    }
+                }
+                else {
+                    self.showAlertWithTitle("Couldn't fetch data usage details",
+                                            message:error.localizedDescription,
+                                            cancelButtonTitle: "Ok")
+                }
+            }
+        }
+    }
     
     func storeDataForOfflineUsage(_ quarterlyUsageRecords:[QuarterlyUsageRecord], userDefaults:UserDefaults) -> Bool {
         
