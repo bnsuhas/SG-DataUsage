@@ -41,7 +41,7 @@ class DataUsageListViewController: UITableViewController, DataUsageListingCellDe
         let dataUsageRequest = DataUsageRequest()
         dataUsageRequest.fetchMobileDataUsage(onSuccess: { (dataUsageResponse) in
             
-            self.storeDataForOfflineUsage(dataUsageResponse.quarterlyUsageRecords)
+            self.storeDataForOfflineUsage(dataUsageResponse.quarterlyUsageRecords, userDefaults: UserDefaults.standard)
             
             self.viewModel = DataUsageListingViewModel.init(quarterlyUsageRecords: dataUsageResponse.quarterlyUsageRecords)
             DispatchQueue.main.async {
@@ -119,13 +119,20 @@ class DataUsageListViewController: UITableViewController, DataUsageListingCellDe
     
     //MARK: - Instance Methods
     
-    func storeDataForOfflineUsage(_ quarterlyUsageRecords:[QuarterlyUsageRecord]) {
-        if let data = try? NSKeyedArchiver.archivedData(withRootObject:quarterlyUsageRecords,
-                                                        requiringSecureCoding: false)
-        {
-            UserDefaults.standard.set(data, forKey: dataUsageListingUIConstants.savedDataKey)
-            UserDefaults.standard.synchronize()
+    func storeDataForOfflineUsage(_ quarterlyUsageRecords:[QuarterlyUsageRecord], userDefaults:UserDefaults) -> Bool {
+        
+        guard quarterlyUsageRecords.count > 0 else {
+            return false
         }
+        if let data = try? NSKeyedArchiver.archivedData(withRootObject:quarterlyUsageRecords,
+                                                        requiringSecureCoding: false) {
+            userDefaults.set(data, forKey: dataUsageListingUIConstants.savedDataKey)
+            userDefaults.synchronize()
+        } else {
+            return false
+        }
+        
+        return true
     }
     
     func displayStoredData() {

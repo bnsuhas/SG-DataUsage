@@ -156,4 +156,14 @@ class DataUsageModelTests: XCTestCase {
             XCTAssert(false, "Failure block should not be called even if proper data is passed to the request block.")
         }
     }
+    
+    func testQuarterlyUsageRecordEncodeObject() {
+        let quarterlyUsageRecordToTest = QuarterlyUsageRecord.init(id: 1, year: "2014", quarter: "Q1", dataUsage: 123.456)
+        XCTAssertNoThrow(try NSKeyedArchiver.archivedData(withRootObject: quarterlyUsageRecordToTest, requiringSecureCoding: false))
+    }
+    
+    func testQuarterlyUsageRecordDecodeObject() {
+        let encodedData = "YnBsaXN0MDDUAQIDBAUGGxxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKYHCBESExRVJG51bGzUCQoLDA0ODxBfEBV2b2x1bWVfb2ZfbW9iaWxlX2RhdGFTX2lkV3F1YXJ0ZXJWJGNsYXNzgAOAAoAEgAVRMVcxMjMuNDU2VzIwMTQtUTHSFRYXGFokY2xhc3NuYW1lWCRjbGFzc2VzXxAhU0dfRGF0YVVzYWdlLlF1YXJ0ZXJseVVzYWdlUmVjb3JkohkaXxAhU0dfRGF0YVVzYWdlLlF1YXJ0ZXJseVVzYWdlUmVjb3JkWE5TT2JqZWN0XxAPTlNLZXllZEFyY2hpdmVy0R0eVHJvb3SAAQAIABEAGgAjAC0AMgA3AD4ARABNAGUAaQBxAHgAegB8AH4AgACCAIoAkgCXAKIAqwDPANIA9gD/AREBFAEZAAAAAAAAAgEAAAAAAAAAHwAAAAAAAAAAAAAAAAAAARs="
+        XCTAssertNoThrow(try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(Data.init(base64Encoded: encodedData)!))
+    }
 }

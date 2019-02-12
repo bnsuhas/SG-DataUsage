@@ -31,6 +31,8 @@
 		EC1E0C322211819F0019C823 /* DataUsageListingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C312211819F0019C823 /* DataUsageListingViewModelTests.swift */; };
 		EC1E0C332211DB3B0019C823 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C292209A1BC0019C823 /* URLSessionMock.swift */; };
 		EC1E0C342211DB430019C823 /* ReachabilityMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C2B220ABA350019C823 /* ReachabilityMock.swift */; };
+		EC1E0C382211F6D40019C823 /* UserDefaultsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C372211F6D40019C823 /* UserDefaultsMock.swift */; };
+		EC1E0C3A22127BCB0019C823 /* DataUsageListingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1E0C3922127BCB0019C823 /* DataUsageListingViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +87,8 @@
 		EC1E0C2D220B155B0019C823 /* DataUsageListingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUsageListingViewModel.swift; sourceTree = "<group>"; };
 		EC1E0C2F221153470019C823 /* DataUsageModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUsageModelTests.swift; sourceTree = "<group>"; };
 		EC1E0C312211819F0019C823 /* DataUsageListingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUsageListingViewModelTests.swift; sourceTree = "<group>"; };
+		EC1E0C372211F6D40019C823 /* UserDefaultsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMock.swift; sourceTree = "<group>"; };
+		EC1E0C3922127BCB0019C823 /* DataUsageListingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUsageListingViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,11 +181,11 @@
 		EC1E0BF52209787D0019C823 /* SG-DataUsageTests */ = {
 			isa = PBXGroup;
 			children = (
+				EC1E0C362211F5DA0019C823 /* Mocks */,
 				EC1E0BF62209787D0019C823 /* NetworkManagerTests.swift */,
-				EC1E0C292209A1BC0019C823 /* URLSessionMock.swift */,
-				EC1E0C2B220ABA350019C823 /* ReachabilityMock.swift */,
 				EC1E0C2F221153470019C823 /* DataUsageModelTests.swift */,
 				EC1E0C312211819F0019C823 /* DataUsageListingViewModelTests.swift */,
+				EC1E0C3922127BCB0019C823 /* DataUsageListingViewControllerTests.swift */,
 				EC1E0BF82209787D0019C823 /* Info.plist */,
 			);
 			path = "SG-DataUsageTests";
@@ -265,6 +269,16 @@
 				EC1E0C272209990D0019C823 /* NetworkManager.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		EC1E0C362211F5DA0019C823 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				EC1E0C2B220ABA350019C823 /* ReachabilityMock.swift */,
+				EC1E0C292209A1BC0019C823 /* URLSessionMock.swift */,
+				EC1E0C372211F6D40019C823 /* UserDefaultsMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -556,11 +570,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC1E0C382211F6D40019C823 /* UserDefaultsMock.swift in Sources */,
 				EC1E0C322211819F0019C823 /* DataUsageListingViewModelTests.swift in Sources */,
 				EC1E0BF72209787D0019C823 /* NetworkManagerTests.swift in Sources */,
 				EC1E0C2A2209A1BC0019C823 /* URLSessionMock.swift in Sources */,
 				EC1E0C2C220ABA350019C823 /* ReachabilityMock.swift in Sources */,
 				EC1E0C30221153470019C823 /* DataUsageModelTests.swift in Sources */,
+				EC1E0C3A22127BCB0019C823 /* DataUsageListingViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
